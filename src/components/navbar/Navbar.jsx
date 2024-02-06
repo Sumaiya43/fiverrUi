@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import "./Navbar.scss"
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
 
 
     const [active, setactive] = useState(false);
     const [open, setOpen] = useState(false);
+
+    const {pathname} = useLocation()
     
     const isActive = () => {
         window.scrollY > 0 ? setactive(true) : setactive(false)
@@ -26,11 +29,14 @@ const Navbar = () => {
     }
 
     return (
-        <div className={active ? "navbar active" : "navbar"}>
+        <div className={active || pathname !=="/" ? "navbar active" : "navbar"}>
             <div className="container">
                 <div className="logo">
-                    <span className='text'>fiverr</span>
-                    <span className='dot'>.</span>
+                    <Link to="/" className='link'>
+                        <span className='text'>fiverr</span>
+                        <span className='dot'>.</span>
+                    </Link>
+                    
                 </div>
                 <div className="links">
                     <span>Fiverr Business</span>
@@ -46,12 +52,12 @@ const Navbar = () => {
                             {open && <div className='options'>
                                 {currentUser?.isSeller && (
                                     <>
-                                        <span>Gigs</span>
-                                        <span>Add New Gig</span>
+                                        <Link to="gigs" className='link' >Gigs</Link>
+                                        <Link to="add" className='link'>Add New Gig</Link>
                                     </>
                                 )}
-                                <span>Orders</span>
-                                <span>Messages</span>
+                                <Link to="orders" className='link'>Orders</Link>
+                                <Link to="messages" className='link'>Messages</Link>
                                 <span>Logout</span>
                             </div>}
                             
@@ -63,11 +69,16 @@ const Navbar = () => {
             </div>
 
 
-            {active &&
+            {active || pathname !== "/" &&
                 <> <hr />
                     <div className='menu'>
-                        <span>text1</span>
-                        <span>text2</span>
+                    <Link to="/" className='link'>Writing & Trnaslation</Link>
+                    <Link to="/" className='link'>AI Services</Link>
+                    <Link to="/" className='link'>Digital Marketing</Link>
+                    <Link to="/" className='link'>Music & Audio</Link>
+                    <Link to="/" className='link'>Programming & Tech</Link>
+                    <Link to="/" className='link'>Business</Link>
+                    <Link to="/" className='link'>LifeStyle</Link>
                     </div>
                 </>
             }
