@@ -2,9 +2,11 @@ import React from 'react'
 import Featured from '../../components/featured/Featured'
 import TrustedBy from '../../components/trustedBy/TrustedBy'
 import Slide from '../../components/Slide/Slide'
-import { cards } from '../../data'
+import { cards, projects } from '../../data'
 import CatCard from '../../components/CatCard/CatCard'
 import "./Home.scss"
+import ProjectCard from '../../components/ProjectCard/ProjectCard'
+import Footer from '../../components/Footer/Footer'
 
 const Home = () => {
   return (
@@ -190,6 +192,16 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      
+      
+      <Slide >
+        {projects.map((card) => (
+          <ProjectCard key={card.id} card={card} />
+        ))}
+      </Slide>
+
+      <Footer/>
     </div>
   )
 }
